@@ -16,4 +16,10 @@ $(document).ready(async function() {
   } catch (error) {
     console.log(error);
   }
+  $("#green").click(async function(){
+    console.log("Zeleni botun");
+  })
+  $("#blue").click(async function(){
+    console.log("Plavi botun");
+  })
 });
