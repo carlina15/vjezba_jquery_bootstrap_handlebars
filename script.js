@@ -1,9 +1,27 @@
-const source = document.getElementById("entry-template").innerHTML;
-const template = Handlebars.compile(source);
+function fetchYellowPokemonData() {
+  const apiUrl = 'https://pokeapi.co/api/v2/pokemon-color/yellow';
 
-const context = { title: "My New Post", body: "This is my first post!", imgURL:"https://robohash.org/matej" };
-const html = template(context);
+  return fetch(apiUrl)
+    .then((response) => response.json())
+    .then((data) => data.pokemon_species);
+}
 
-console.log(html)
+function filterYellowPokemon(pokemonSpecies) {
+  return pokemonSpecies.filter((species) => species.name !== "");
+}
 
-document.querySelector("body").innerHTML = html
+
+function displayYellowPokemonData(pokemonData) {
+  const source = document.getElementById('pokemon-template').innerHTML;
+  const template = Handlebars.compile(source);
+  const context = { pokemon: pokemonData };
+  const html = template(context);
+
+  const pokemonList = document.getElementById('pokemon-list');
+  pokemonList.innerHTML = html;
+}
+
+fetchYellowPokemonData()
+  .then((pokemonSpecies) => filterYellowPokemon(pokemonSpecies))
+  .then((filteredPokemon) => displayYellowPokemonData(filteredPokemon))
+  .catch((error) => console.error('Greška pri dohvaćanju podataka:', error));
