@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HBJ</title>
+    <title>Pokemon API s Handlebars</title>
     <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
     <script src="script.js" defer></script>
 </head>
 <body>
-    <script id="entry-template" type="text/x-handlebars-template">
-        <div class="entry">
-          <h1>{{title}}</h1>
-          <div class="body">
-            {{body}}
-          </div>
-          <img src={{imgURL}} width="200" alt="">
-        </div>
+    <ul id="pokemon-list"></ul>
+
+    <script id="pokemon-template" type="text/x-handlebars-template">
+        {{#each pokemon}}
+          <li class="pokemon">
+            <h1>{{this.name}}</h1>
+          </li>
+        {{/each}}
     </script>
 </body>
 </html>
